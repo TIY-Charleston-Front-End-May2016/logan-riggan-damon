@@ -6,6 +6,7 @@ var chatPage = {
     url: 'http://tiny-tiny.herokuapp.com/collections/damonrigganloganchat',
     chats:[],
     init: function () {
+
     setInterval(function(){
       chatPage.styling();
     },2000);
@@ -15,6 +16,18 @@ var chatPage = {
       chatPage.getChat();
     },
     events: function(){
+
+//Create user
+$('button[name="submit"]').on('click', function(event){
+var user = {
+  userName: $('input[name="username"]').val(),
+  password: $('input[name="password"]').val(),
+};
+console.log(user);
+
+})
+
+
 
 //POST a chat
 $('button[type="post"]').on('click', function(event){
@@ -75,9 +88,11 @@ getChat: function () {
     success: function(data) {
       console.log("we got something", data);
       $('.chatlog ul').html("");
+      data.reverse();
       data.forEach(function(chats) {
       $('ul').append(`<li data-id=${chats._id}> <a href="#"> <h2>${chats.user}:</h2><h3>${chats.content}</h3> </a></li>`);
       })
+
     },
     error: function(err) {
       console.error("WTF",err);
@@ -98,10 +113,9 @@ deleteChat: function (msgId) {
       console.error("you blew it", err);
       }
     })},
-reverseChat: function () {
-    var list = $('ul');
-    var listItems = list.children('li');
-    list.append(listItems.get().reverse());
-    }
+
+
+
+
   }
 //end of chatPage
