@@ -60,13 +60,12 @@ $('button[type="post"]').on('click', function(event){
     data: newMsg,
     user:`${newMsg.user}`,
     success: function(data) {
-<<<<<<< HEAD
 
-      
-=======
+
+
       console.log("ItWorks", data);
       $('.chatbox ul').append(`<li> <a href="#> <h2 class=${newMsg.user}>${newMsg.user}</h2><h3>${newMsg.content}</h3> </a></li>`);
->>>>>>> e50a7d713a059240be1e15ecb4da14bf0942ccc0
+
     },
     error: function(err) {
       console.error("WTF",err);
@@ -103,14 +102,14 @@ getChat: function () {
       $('.chatlog ul').html("");
       data.reverse();
       data.forEach(function(chats) {
-<<<<<<< HEAD
 
-=======
+
+
       $('ul').append(`<li data-id=${chats._id}> <a href="#"> <h2 class=${chats.user}><p>${chats.user}</p></h2><h3>${chats.content}</h3> </a></li>`);
       console.log(chats.user);
     });
       chatPage.reverseChat();
->>>>>>> e50a7d713a059240be1e15ecb4da14bf0942ccc0
+
     },
     error: function(err) {
       console.error("WTF",err);
@@ -131,12 +130,12 @@ deleteChat: function (msgId) {
       console.error("you blew it", err);
       }
     })},
-<<<<<<< HEAD
 
 
 
 
-=======
+
+
 reverseChat: function () {
   event.preventDefault();
     var list = $('ul');
@@ -149,7 +148,7 @@ UserId: function() {
   console.log($('ul').children('li'));
 
     }
->>>>>>> e50a7d713a059240be1e15ecb4da14bf0942ccc0
+
   }
 
 //end of chatPage
