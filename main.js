@@ -100,7 +100,7 @@ getChat: function () {
     success: function(data) {
 
       $('.chatlog ul').html("");
-      data.reverse();
+    
       data.forEach(function(chats) {
 
 
