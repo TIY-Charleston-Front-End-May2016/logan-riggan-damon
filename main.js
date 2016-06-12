@@ -3,13 +3,14 @@ $(document).ready(function() {
 })
 
 var chatPage = {
+    Name: prompt("Enter User name"),
     url: 'http://tiny-tiny.herokuapp.com/collections/damonrigganloganchat',
     chats:[],
     init: function () {
 
     setInterval(function(){
       chatPage.styling();
-    },2000);
+    },1000);
       chatPage.events();
     },
     styling: function(){
@@ -44,52 +45,53 @@ var chatPage = {
 $('button[type="post"]').on('click', function(event){
   event.preventDefault();
   var newMsg = {
-    user: $('input[name="user"]').val(),
+    user: chatPage.Name,
     content: $('input[name="chatbox"]').val(),
   };
   console.log(newMsg);
 
-  $('.chatlog ul').append(`<li> <a href="#> <h2>${newMsg.user}:</h2><h3>${newMsg.content}</h3> </a></li>`);
+  $('.chatlog ul').append(`<li> <a href="#> <h2 class=${newMsg.user}>${newMsg.user}</h2><h3>${newMsg.content}</h3> </a></li>`);
+    chatPage.reverseChat();
+
 
   $.ajax({
     url: 'http://tiny-tiny.herokuapp.com/collections/damonrigganloganchat',
     method: "POST",
     data: newMsg,
+    user:`${newMsg.user}`,
     success: function(data) {
+<<<<<<< HEAD
 
-      $('.chatbox ul').append(`<li> <a href="#> <h2>${newMsg.user}:</h2><h3>${newMsg.content}</h3> </a></li>`);
-      chatPage.getChat();
+      
+=======
+      console.log("ItWorks", data);
+      $('.chatbox ul').append(`<li> <a href="#> <h2 class=${newMsg.user}>${newMsg.user}</h2><h3>${newMsg.content}</h3> </a></li>`);
+>>>>>>> e50a7d713a059240be1e15ecb4da14bf0942ccc0
     },
     error: function(err) {
       console.error("WTF",err);
     }
   })
+  $('.message').val("");
+
 })
 //end of POST
 
 //find delete item
 $(document).on('click', 'a',function(event){
+  if(chatPage.Name === $(this).children('h2').last().attr("class")){
   event.preventDefault();
     console.log($(this));
       var msgId = $(this).parent().data('id');
       console.log(msgId);
       chatPage.deleteChat(msgId);
       $(this).remove();
-  })
+  }})
 
 
 
 },
 // end of events
-
-
-
-
-// getUser: function() {
-// var user = prompt("Please enter your username:");
-// console.log(user);
-//
-// },
 
 
 getChat: function () {
@@ -101,9 +103,14 @@ getChat: function () {
       $('.chatlog ul').html("");
       data.reverse();
       data.forEach(function(chats) {
-      $('ul').append(`<li data-id=${chats._id}> <a href="#"> <h2>${chats.user}:</h2><h3>${chats.content}</h3> </a></li>`);
-      })
+<<<<<<< HEAD
 
+=======
+      $('ul').append(`<li data-id=${chats._id}> <a href="#"> <h2 class=${chats.user}><p>${chats.user}</p></h2><h3>${chats.content}</h3> </a></li>`);
+      console.log(chats.user);
+    });
+      chatPage.reverseChat();
+>>>>>>> e50a7d713a059240be1e15ecb4da14bf0942ccc0
     },
     error: function(err) {
       console.error("WTF",err);
@@ -124,9 +131,25 @@ deleteChat: function (msgId) {
       console.error("you blew it", err);
       }
     })},
+<<<<<<< HEAD
 
 
 
 
+=======
+reverseChat: function () {
+  event.preventDefault();
+    var list = $('ul');
+    var listItems = list.children('li');
+    list.append(listItems.get().reverse());
+  },
+UserId: function() {
+  var list = $('ul');
+  var listItems= list.children('li');
+  console.log($('ul').children('li'));
+
+    }
+>>>>>>> e50a7d713a059240be1e15ecb4da14bf0942ccc0
   }
+
 //end of chatPage
