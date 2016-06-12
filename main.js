@@ -18,14 +18,25 @@ var chatPage = {
     events: function(){
 
 //Create user
-$('button[name="submit"]').on('click', function(event){
-var user = {
-  userName: $('input[name="username"]').val(),
-  password: $('input[name="password"]').val(),
-};
-console.log(user);
-
-})
+// $('button[name="submit"]').on('click', function(event){
+// var user = {
+//   userName: $('input[name="username"]').val(),
+//   password: $('input[name="password"]').val(),
+// };
+// console.log(user);
+// $.ajax({
+//   url: 'http://tiny-tiny.herokuapp.com/collections/damonrigganloganchat',
+//   method: "POST",
+//   data: user,
+//   success: function(data) {
+//     console.log("ItWorks", data);
+//     ;
+//   },
+//   error: function(err) {
+//     console.error("WTF",err);
+//   }
+// })
+// })
 
 
 
@@ -45,7 +56,7 @@ $('button[type="post"]').on('click', function(event){
     method: "POST",
     data: newMsg,
     success: function(data) {
-      console.log("ItWorks", data);
+
       $('.chatbox ul').append(`<li> <a href="#> <h2>${newMsg.user}:</h2><h3>${newMsg.content}</h3> </a></li>`);
       chatPage.getChat();
     },
@@ -86,7 +97,7 @@ getChat: function () {
     url: 'http://tiny-tiny.herokuapp.com/collections/damonrigganloganchat',
     method: "GET",
     success: function(data) {
-      console.log("we got something", data);
+
       $('.chatlog ul').html("");
       data.reverse();
       data.forEach(function(chats) {
