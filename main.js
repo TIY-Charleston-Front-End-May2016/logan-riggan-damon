@@ -9,7 +9,7 @@ var chatPage = {
     init: function () {
     setInterval(function(){
       chatPage.styling();
-    },10000);
+    },1000);
       chatPage.events();
     },
     styling: function(){
@@ -34,6 +34,7 @@ $('button[type="post"]').on('click', function(event){
     url: 'http://tiny-tiny.herokuapp.com/collections/damonrigganloganchat',
     method: "POST",
     data: newMsg,
+    user:`${newMsg.user}`,
     success: function(data) {
       console.log("ItWorks", data);
       $('.chatbox ul').append(`<li> <a href="#> <h2 class=${newMsg.user}>${newMsg.user}</h2><h3>${newMsg.content}</h3> </a></li>`);
@@ -49,13 +50,14 @@ $('button[type="post"]').on('click', function(event){
 
 //find delete item
 $(document).on('click', 'a',function(event){
+  if(chatPage.Name === $(this).children('h2').last().attr("class")){
   event.preventDefault();
     console.log($(this));
       var msgId = $(this).parent().data('id');
       console.log(msgId);
       chatPage.deleteChat(msgId);
       $(this).remove();
-  })
+  }})
 
 
 
